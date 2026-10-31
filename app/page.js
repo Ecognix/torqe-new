@@ -23,7 +23,7 @@ export default function Home() {
             <span className="line"><span>your <b className="accent">inbound.</b></span></span>
           </h1>
           <p className="lead mx-auto mt-7 fade-in">Torqe is an AI agent that qualifies leads, answers technical questions, drafts quotes and books meetings on WhatsApp, email and LinkedIn, while your team approves the moves that matter.</p>
-          <div className="flex flex-wrap justify-center gap-4 mt-9 fade-in">
+          <div className="hero-actions flex flex-wrap justify-center gap-4 mt-9 fade-in">
             <Link href="/contact" className="btn">Book a demo</Link>
             <Link href="/pilot" className="btn btn-ghost">Become a pilot partner</Link>
           </div>
@@ -62,8 +62,8 @@ export default function Home() {
               </article>
             ))}
           </Reveal>
-          <Reveal className="mt-6 card flex flex-wrap items-center gap-4 justify-between" delay={80}>
-            <div className="flex items-center gap-4"><span className="ibox !mb-0"><Icon name="spark" /></span><div><h3 className="h3">And anything else your workflow needs</h3><p className="small muted">Beyond the core flows, Torqe can execute other tasks you define, within your guardrails.</p></div></div>
+          <Reveal className="mt-6 workflow-callout flex flex-wrap items-center gap-4 justify-between" delay={80}>
+            <div className="flex items-center gap-4"><span className="ibox !mb-0"><Icon name="spark" /></span><div className="grid gap-3"><h3 className="h3">And anything else your workflow needs</h3><p className="small muted">Beyond the core flows, Torqe can execute other tasks you define, within your guardrails.</p></div></div>
             <Link href="/workflows" className="link">Explore AI workflows</Link>
           </Reveal>
         </div>

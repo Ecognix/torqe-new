@@ -15,7 +15,7 @@ export default function UseCases() {
           <p className="lead mt-6">Each workflow shows what the AI agent does on its own and where your team approves. Start with one and add more as trust grows.</p>
         </div>
       </section>
-      <section className="pb-20"><div className="wrap"><UseCaseTabs /></div></section>
+      <section className="pb-20"><div className="wrap"><UseCaseTabs plainPanel /></div></section>
       <section className="section tint">
         <div className="wrap">
           <Reveal as="h2" className="h2 narrow">Every workflow at a glance</Reveal>
@@ -25,8 +25,8 @@ export default function UseCases() {
                 <div className="flex gap-2"><span className="tag tag-o">{u.steps.filter((s) => s[0] === "AI").length} AI steps</span><span className="tag">{u.steps.filter((s) => s[0] === "Human").length} human</span></div></article>
             ))}
           </Reveal>
-          <Reveal className="mt-6 card flex flex-wrap items-center gap-4 justify-between" delay={80}>
-            <div><h3 className="h3">Something else in your process?</h3><p className="small muted">Torqe can execute other tasks according to your requirements. Tell us what to automate.</p></div>
+          <Reveal className="mt-8 workflow-callout flex flex-wrap items-center gap-4 justify-between" delay={80}>
+            <div className="grid gap-3"><h3 className="h3">Something else in your process?</h3><p className="small muted">Torqe can execute other tasks according to your requirements. Tell us what to automate.</p></div>
             <Link href="/contact" className="link">Talk to the team</Link>
           </Reveal>
         </div>

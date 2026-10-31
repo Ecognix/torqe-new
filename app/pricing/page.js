@@ -34,7 +34,7 @@ export default function Pricing() {
       <section className="section tint">
         <div className="wrap">
           <Reveal as="h2" className="h2 narrow mb-10">Compare plans</Reveal>
-          <div className="card !p-2 overflow-x-auto">
+          <div className="compare-table-wrap">
             <table className="cmp"><thead><tr><th>Feature</th><th>Pilot</th><th>Growth</th><th>Enterprise</th></tr></thead>
               <tbody>{compare.map((r) => (<tr key={r[0]}><td>{r[0]}</td><td>{cell(r[1])}</td><td>{cell(r[2])}</td><td>{cell(r[3])}</td></tr>))}</tbody></table>
           </div>

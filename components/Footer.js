@@ -11,10 +11,18 @@ export default function Footer() {
         </div>
         <div className="grid gap-2 content-start"><h4 className="font-semibold mb-2">Product</h4><Link href="/product">How it works</Link><Link href="/workflows">Workflows</Link><Link href="/integrations">Integrations</Link><Link href="/pricing">Pricing</Link></div>
         <div className="grid gap-2 content-start"><h4 className="font-semibold mb-2">Get started</h4><Link href="/pilot">Pilot partners</Link><Link href="/contact">Book a demo</Link></div>
-        <div className="grid gap-2 content-start"><h4 className="font-semibold mb-2">Contact</h4><a href="mailto:hello@torqe.ai">hello@torqe.ai</a><span className="muted">Built with AI, for revenue teams</span></div>
+        <div className="grid gap-2 content-start">
+          <h4 className="font-semibold mb-2">Contact</h4>
+          <a href="mailto:hello@torqe.ai">hello@torqe.ai</a>
+          <a href="mailto:sales@torqe.ai">sales@torqe.ai</a>
+          <a href="mailto:support@torqe.ai">support@torqe.ai</a>
+          <h4 className="font-semibold mt-5 mb-1">Headquarters</h4>
+          <address className="not-italic muted">Location keep 19, Satya Bora Road, Barowari, Guwahati - 781001</address>
+          <span className="muted mt-2">Built with AI, for revenue teams</span>
+        </div>
       </div>
       <div className="wrap flex flex-wrap justify-between gap-3 pb-10 text-sm muted">
-        <span>© {new Date().getFullYear()} Torqe. All rights reserved.</span><span>Agentic AI for B2B inbound sales</span>
+        <span>© {new Date().getFullYear()} Ecognix Technologies. All rights reserved.</span><span>Agentic AI for B2B inbound sales</span>
       </div>
     </footer>
   );

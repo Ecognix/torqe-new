@@ -104,7 +104,7 @@ export default function Product() {
       <section className="section dark text-center">
         <div className="wrap">
           <h2 className="h2 mx-auto max-w-[20ch]">See the AI agent on your own inbound</h2>
-          <div className="flex flex-wrap justify-center gap-4 mt-9"><Link href="/contact" className="btn btn-light">Book a demo</Link><Link href="/pricing" className="link">View pricing</Link></div>
+          <div className="product-final-actions flex flex-wrap justify-center gap-4 mt-9"><Link href="/contact" className="btn btn-light">Book a demo</Link><Link href="/pricing" className="link">View pricing</Link></div>
         </div>
       </section>
     </>
