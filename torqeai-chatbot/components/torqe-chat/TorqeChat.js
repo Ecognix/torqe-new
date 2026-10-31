@@ -37,7 +37,6 @@ const SUGGESTIONS = [
 const IC = {
   send: "M12 19V5 M5 12l7-7 7 7", copy: "M9 9h10v10H9z M5 15V5h10", check: "M5 12l5 5 9-10", plus: "M12 5v14 M5 12h14",
   redo: "M20 11a8 8 0 00-14-4L4 9 M4 4v5h5 M4 13a8 8 0 0014 4l2-2", close: "M6 6l12 12 M18 6L6 18", clip: "M21 12.5l-8.5 8.5a5.5 5.5 0 01-7.8-7.8l9-9a3.7 3.7 0 015.2 5.2l-9 9a1.8 1.8 0 01-2.6-2.6l8-8",
-  sparkle: "M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z M19 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z",
   share: "M14 3h7v7 M21 3l-11 11 M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6",
   history: "M3 12a9 9 0 109-9 9.5 9.5 0 00-6.4 2.6L3 8 M3 3v5h5 M12 7v5l3 2",
 };
@@ -326,7 +325,7 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
                         <div className="tc-followups" aria-label="Suggested questions">
                           <span>Suggested questions</span>
                           {followups.map((question) => (
-                            <button key={question} onClick={() => send(question)}><Ico d={IC.sparkle} size={14} />{question}</button>
+                            <button key={question} onClick={() => send(question)}>{question}</button>
                           ))}
                         </div>
                       )}
