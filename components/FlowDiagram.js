@@ -10,16 +10,21 @@ export default function FlowDiagram() {
         {stages.map((s, i) => (
           <div key={s.t} className="node" style={{ "--i": i }}>
             <div className="flow-node-head">
+              <h3 className="h3">{s.t}</h3>
               <Icon name={s.icon} size={22} className="text-orange" />
             </div>
-            <h3 className="h3 mb-2">{s.t}</h3>
             <p className="small muted">{s.d}</p>
           </div>
         ))}
       </div>
-      <div className="flow-approval mt-6 card-dark flex flex-wrap items-center gap-x-8 gap-y-4">
-        <div className="flex items-center gap-3"><span className="tag tag-o">Human in the loop</span><span className="small">High-stakes action? The AI pauses and asks.</span></div>
-        <div className="flex items-center gap-3 md:ml-auto"><ChannelIcon k="slack" size={30} /><ChannelIcon k="teams" size={30} /><ChannelIcon k="dash" size={30} /><span className="small muted">Approve in one click, the AI continues</span></div>
+      <div className="flow-approval mt-6 card-dark">
+        <div className="flow-approval-question">
+          <p className="flow-approval-prompt">High-stakes action? The AI pauses and asks.<span className="tag tag-o">Human in the loop</span></p>
+        </div>
+        <div className="flow-approval-channels">
+          <div className="flow-approval-icons"><ChannelIcon k="slack" size={30} /><ChannelIcon k="teams" size={30} /><ChannelIcon k="dash" size={30} /></div>
+          <span className="small muted">Approve in one click, the AI continues</span>
+        </div>
       </div>
     </div>
   );

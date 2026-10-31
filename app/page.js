@@ -41,10 +41,6 @@ export default function Home() {
       <section className="pb-20">
         <div className="wrap"><p className="text-center small muted mb-6">The AI agent meets prospects where they already are, and your team where they already work</p></div>
         <Marquee />
-        <div className="wrap integration-marquees mt-8">
-          <LogoMarquee items={modelMarqueeItems} label="AI model options" />
-          <LogoMarquee items={toolMarqueeItems} label="Tools and integrations" />
-        </div>
       </section>
 
       <section className="section pt-8">
@@ -73,6 +69,9 @@ export default function Home() {
               </article>
             ))}
           </Reveal>
+          <div className="mt-12">
+            <LogoMarquee items={toolMarqueeItems} label="Tools and integrations" />
+          </div>
           <Reveal className="mt-6 workflow-callout flex flex-wrap items-center gap-4 justify-start" delay={80}>
             <div className="grid gap-3 text-left"><h3 className="h3">And anything else your workflow needs</h3><p className="small muted">Beyond the core flows, Torqe can execute other tasks you define, within your guardrails.</p></div>
             <Link href="/workflows" className="link">Explore AI workflows</Link>
@@ -85,6 +84,9 @@ export default function Home() {
           <Reveal as="h2" className="h2 narrow">The <span className="heading-accent">AI agent loop</span> behind every conversation</Reveal>
           <p className="lead mt-5 mb-12">Five stages run on every inbound, and every stage is logged so your team can see exactly why the AI did what it did.</p>
           <FlowDiagram />
+          <div className="mt-12">
+            <LogoMarquee items={modelMarqueeItems} label="AI model options" dark />
+          </div>
         </div>
       </section>
 

@@ -35,10 +35,10 @@ export default function Header() {
         <Link href="/" aria-label={isChat ? "TorqeAI home" : "Torqe home"}>
           {isChat ? (
             <span className="torqeai-brand">
-              <Logo size={26} />
+              <Logo size={29} />
               <span><span>TorqeAI</span><small>Ask anything about Torqe</small></span>
             </span>
-          ) : <Wordmark size={26} />}
+          ) : <Wordmark size={30} />}
         </Link>
         {!isChat && (
           <nav className={`nav ${open ? "open" : ""}`} aria-label="Main">
