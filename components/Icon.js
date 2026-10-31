@@ -13,6 +13,8 @@ const P = {
   refresh: "M20 11a8 8 0 00-14-4L4 9 M4 4v5h5 M4 13a8 8 0 0014 4l2-2 M20 20v-5h-5",
   db: "M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6 M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3",
   tag: "M3 12V4h8l10 10-8 8z M7.5 8.5h.01",
+  cloud: "M7 18h10a4 4 0 00.6-8A6 6 0 006 8a5 5 0 001 10z",
+  server: "M4 5h16v6H4z M4 13h16v6H4z M7 8h.01 M7 16h.01 M11 8h6 M11 16h6",
 };
 export default function Icon({ name, size = 24, className = "" }) {
   return (

@@ -4,12 +4,15 @@ import Icon from "../components/Icon";
 import Logo from "../components/Logo";
 import ChatDemo from "../components/ChatDemo";
 import Marquee from "../components/Marquee";
+import LogoMarquee from "../components/LogoMarquee";
+import ModelOptions from "../components/ModelOptions";
+import SecurityOverview from "../components/SecurityOverview";
 import FeatureVisual from "../components/FeatureVisual";
 import FlowDiagram from "../components/FlowDiagram";
 import DashboardMock from "../components/DashboardMock";
 import UseCaseTabs from "../components/UseCaseTabs";
 import Faq from "../components/Faq";
-import { facts, features, triggers, autonomous, approval } from "../lib/data";
+import { facts, features, triggers, autonomous, approval, modelMarqueeItems, toolMarqueeItems } from "../lib/data";
 
 export default function Home() {
   return (
@@ -38,6 +41,10 @@ export default function Home() {
       <section className="pb-20">
         <div className="wrap"><p className="text-center small muted mb-6">The AI agent meets prospects where they already are, and your team where they already work</p></div>
         <Marquee />
+        <div className="wrap integration-marquees mt-8">
+          <LogoMarquee items={modelMarqueeItems} label="AI model options" />
+          <LogoMarquee items={toolMarqueeItems} label="Tools and integrations" />
+        </div>
       </section>
 
       <section className="section pt-8">
@@ -113,6 +120,9 @@ export default function Home() {
           <UseCaseTabs />
         </div>
       </section>
+
+      <ModelOptions />
+      <SecurityOverview />
 
       <section className="section tint">
         <div className="wrap split">

@@ -3,6 +3,8 @@ import Reveal from "../../components/Reveal";
 import Icon from "../../components/Icon";
 import Window from "../../components/Window";
 import ChannelIcon from "../../components/ChannelIcon";
+import ModelOptions from "../../components/ModelOptions";
+import SecurityOverview from "../../components/SecurityOverview";
 import { tools } from "../../lib/data";
 
 export const metadata = { title: "Integrations", description: "The channels, team tools and data systems the Torqe AI agent connects to." };
@@ -33,6 +35,8 @@ export default function Integrations() {
           ))}
         </Reveal>
       </section>
+      <ModelOptions />
+      <SecurityOverview />
       <section className="section tint">
         <div className="wrap">
           <Reveal as="h2" className="h2 narrow">Connected in <span className="heading-accent">three steps</span></Reveal>
