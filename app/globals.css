@@ -306,3 +306,8 @@ h1,h2,h3,h4{font-family:var(--font-inter),system-ui,sans-serif;font-weight:600;l
 .winc-bar i{width:11px;height:11px;border-radius:50%}
 .winc-bar span{margin-left:.7rem}
 .winc-body{padding:1.7rem 1.6rem 1.9rem}
+.dashboard-mock-grid{align-items:stretch}
+.dashboard-feed-card,.dashboard-audit-card{min-width:0;height:100%}
+.dashboard-actions-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.dashboard-actions{display:flex;align-items:center;gap:.5rem;width:max-content;min-width:100%;white-space:nowrap}
+.dashboard-actions>.btn{flex:none}
