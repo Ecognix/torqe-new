@@ -95,9 +95,9 @@ export default function LeadForm({ kind = "demo" }) {
       <label>{pilot ? "What would you like to automate?" : "What would you like Torqe to handle?"}<textarea name="message" rows={pilot ? 3 : 4} placeholder={pilot ? "Share a little about your inbound process..." : "Qualification, quotes, scheduling, follow-ups..."} /></label>
       <label className="lead-form-consent">
         <input type="checkbox" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />
-        <span>I agree to send these details to Torqe so the team can respond. The details will be emailed to <a href="mailto:hello@torqe.ai">hello@torqe.ai</a>.</span>
+        <span>I agree to send these details to Torqe so the team can respond. The details will be emailed to <a href="mailto:admin@ecognix.in">admin@ecognix.in</a>.</span>
       </label>
-      {error && <p className="lead-form-error" role="alert">{error}</p>}
+      {error && <p className="lead-form-error" role="alert">{error} <a href="mailto:admin@ecognix.in">Email admin@ecognix.in</a></p>}
       <button className="btn justify-self-start" type="submit" disabled={!consent || submitting}>{submitting ? "Sending…" : pilot ? "Apply to the pilot" : "Book a demo"}</button>
     </form>
   );

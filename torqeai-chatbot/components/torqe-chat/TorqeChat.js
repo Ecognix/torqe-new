@@ -106,9 +106,9 @@ function LeadActionCard({ action }) {
       </label>
       <label className="tc-lead-consent">
         <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
-        <span>I agree to send these details to Torqe so the team can respond to my request. They will be emailed to <a href="mailto:hello@torqe.ai">hello@torqe.ai</a>.</span>
+        <span>I agree to send these details to Torqe so the team can respond to my request. They will be emailed to <a href="mailto:admin@ecognix.in">admin@ecognix.in</a>.</span>
       </label>
-      {error && <p className="tc-lead-error" role="alert">{error}</p>}
+      {error && <p className="tc-lead-error" role="alert">{error} <a href="mailto:admin@ecognix.in">Email admin@ecognix.in</a></p>}
       <button className="tc-lead-submit" type="submit" disabled={!consent || busy}>{busy ? "Sending…" : title}</button>
     </form>
   );
@@ -139,7 +139,7 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
   const [termsChecked, setTermsChecked] = useState(false);
   const [researchChoice, setResearchChoice] = useState("no");
   const [serviceStatus, setServiceStatus] = useState("checking");
-  const abortRef = useRef(null), replyRef = useRef(null), fileRef = useRef(null), taRef = useRef(null), scrollRef = useRef(null), endRef = useRef(null), stick = useRef(true);
+  const abortRef = useRef(null), replyRef = useRef(null), fileRef = useRef(null), taRef = useRef(null), scrollRef = useRef(null), stick = useRef(true);
 
   const activeSession = sessions.find((session) => session.id === activeId);
   const messages = activeSession?.messages || [];
@@ -215,7 +215,10 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
     return () => { active = false; };
   }, [endpoint]);
 
-  useEffect(() => { if (stick.current) endRef.current?.scrollIntoView({ block: "end" }); }, [messages, error]);
+  useEffect(() => {
+    const scrollElement = scrollRef.current;
+    if (stick.current && scrollElement) scrollElement.scrollTop = scrollElement.scrollHeight;
+  }, [messages, error]);
   useEffect(() => { const el = taRef.current; if (el) { el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight, 200) + "px"; } }, [input]);
 
   const updateSessionMessages = useCallback((sessionId, update) => {
@@ -439,7 +442,6 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
             </div>
           ))}
           {error && <div className="tc-error" role="alert">{error}</div>}
-          <div ref={endRef} />
         </div>
       </div>
 

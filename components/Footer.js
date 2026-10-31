@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Wordmark } from "./Logo";
+import UpdatesSignup from "./UpdatesSignup";
 
 export default function Footer() {
   const path = usePathname();
@@ -9,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer className="footer tint">
-      <div className="wrap grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr] pt-20 pb-8">
+      <div className="wrap grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr] pt-20 pb-8">
         <div>
           <Wordmark size={34} />
           <p className="mt-5 max-w-xs muted">The AI agent that executes your B2B inbound sales, from first message to booked meeting.</p>
@@ -25,6 +26,7 @@ export default function Footer() {
           <address className="not-italic muted">Location keep 19, Satya Bora Road, Barowari, Guwahati - 781001</address>
           <span className="muted mt-2">Built with AI, for revenue teams</span>
         </div>
+        <UpdatesSignup />
       </div>
       <div className="wrap flex flex-wrap justify-between gap-3 pb-10 text-sm muted">
         <span>© {new Date().getFullYear()} Ecognix Technologies. All rights reserved.</span><span>Agentic AI for B2B inbound sales</span>
