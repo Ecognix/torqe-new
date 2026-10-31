@@ -38,7 +38,7 @@ export default function Home() {
         <div className="wrap relative mt-16 fade-in"><ChatDemo /></div>
       </section>
 
-      <section className="pb-20">
+      <section className="channel-marquee-section">
         <div className="wrap"><p className="text-center small muted mb-6">The AI agent meets prospects where they already are, and your team where they already work</p></div>
         <Marquee />
       </section>
@@ -69,7 +69,7 @@ export default function Home() {
               </article>
             ))}
           </Reveal>
-          <div className="mt-12">
+          <div className="tools-marquee-block mt-12">
             <LogoMarquee items={toolMarqueeItems} label="Tools and integrations" />
           </div>
           <Reveal className="mt-6 workflow-callout flex flex-wrap items-center gap-4 justify-start" delay={80}>

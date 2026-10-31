@@ -22,8 +22,8 @@ export default function FlowDiagram() {
           <p className="flow-approval-prompt">High-stakes action? The AI pauses and asks.<span className="tag tag-o">Human in the loop</span></p>
         </div>
         <div className="flow-approval-channels">
-          <div className="flow-approval-icons"><ChannelIcon k="slack" size={30} /><ChannelIcon k="teams" size={30} /><ChannelIcon k="dash" size={30} /></div>
-          <span className="small muted">Approve in one click, the AI continues</span>
+          <div className="flow-approval-icons"><ChannelIcon k="slack" size={30} /><ChannelIcon k="teams" size={30} /><ChannelIcon k="dash" size={30} whiteLogo /></div>
+          <span className="small muted">Approve in one click</span>
         </div>
       </div>
     </div>
