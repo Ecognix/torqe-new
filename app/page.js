@@ -123,9 +123,9 @@ export default function Home() {
 
       <section className="section dark relative overflow-hidden text-center">
         <div className="wrap relative">
-          <Reveal as="h2" className="h2 mx-auto max-w-[20ch]">Become a Torqe <span className="heading-accent">pilot partner</span></Reveal>
+          <Reveal as="h2" className="h2 mx-auto max-w-[20ch]">Become a Torqe pilot partner</Reveal>
           <p className="lead mx-auto mt-5">Work directly with the founding team, automate your first inbound workflow with AI, and help shape what Torqe builds next.</p>
-          <div className="flex flex-wrap justify-center gap-4 mt-9"><Link href="/pilot" className="btn btn-light">Apply to the pilot</Link><Link href="/contact" className="link">Or book a demo</Link></div>
+          <div className="pilot-cta flex flex-wrap justify-center gap-4 mt-9"><Link href="/pilot" className="btn btn-light">Apply to the pilot</Link><Link href="/contact" className="link">Or book a demo</Link></div>
         </div>
       </section>
     </>

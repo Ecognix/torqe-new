@@ -11,7 +11,6 @@ export default function FlowDiagram() {
           <div key={s.t} className="node" style={{ "--i": i }}>
             <div className="flow-node-head">
               <Icon name={s.icon} size={22} className="text-orange" />
-              <span className="num">{i + 1}</span>
             </div>
             <h3 className="h3 mb-2">{s.t}</h3>
             <p className="small muted">{s.d}</p>
