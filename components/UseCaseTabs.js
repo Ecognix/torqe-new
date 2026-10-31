@@ -13,12 +13,12 @@ export default function UseCaseTabs({ plainPanel = false }) {
           <button key={c.tab} role="tab" aria-selected={i === k} className={`tab ${i === k ? "on" : ""}`} onClick={() => setI(k)}><Icon name={c.icon} size={20} />{c.tab}</button>
         ))}
       </div>
-      <div key={i} className={`use-case-panel${plainPanel ? " use-case-panel-plain" : " card"}`} style={{ animation: "pop .6s var(--ease) both", padding: "clamp(1.5rem,4vw,2.6rem)" }}>
+      <div key={i} className="use-case-panel card" style={{ animation: "pop .6s var(--ease) both", padding: "clamp(1.5rem,4vw,2.6rem)" }}>
         <h3 className="h2 mb-3 max-w-[22ch]">{u.t}</h3>
         <p className="muted max-w-[56ch] mb-8">{u.d}</p>
         <ol className="grid gap-4">
           {u.steps.map(([a, t], k) => (
-            <li key={k} className="flex gap-4 items-start"><span className="font-display font-semibold text-muted w-6">{k + 1}</span><span className={`badge ${a === "AI" ? "badge-ai" : "badge-h"}`}>{a}</span><span>{t}</span></li>
+            <li key={k} className="use-case-step"><span className="use-case-step-number">{k + 1}</span><span>{t}</span><span className={`badge ${a === "AI" ? "badge-ai" : "badge-h"}`}>{a}</span></li>
           ))}
         </ol>
         <div className="mt-8 pt-5 border-t border-black/10 flex items-center gap-3"><Icon name="check" size={18} className="text-orange" /><b className="font-medium">{u.out}</b></div>

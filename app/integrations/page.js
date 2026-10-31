@@ -18,7 +18,7 @@ export default function Integrations() {
     <>
       <section className="pt-40 pb-16">
         <div className="wrap">
-          <h1 className="h1 max-w-[16ch]">Works where your buyers and team already are.</h1>
+          <h1 className="h1 max-w-[16ch]">Works where your <span className="heading-accent">buyers</span> and team already are.</h1>
           <p className="lead mt-6">Torqe connects the AI agent to the channels prospects use, the tools your team lives in and the systems that hold your knowledge.</p>
         </div>
       </section>
@@ -35,7 +35,7 @@ export default function Integrations() {
       </section>
       <section className="section tint">
         <div className="wrap">
-          <Reveal as="h2" className="h2 narrow">Connected in three steps</Reveal>
+          <Reveal as="h2" className="h2 narrow">Connected in <span className="heading-accent">three steps</span></Reveal>
           <Reveal stagger className="grid md:grid-cols-3 gap-6 mt-12">
             {steps.map((s) => (<article key={s.t} className="card"><span className="ibox"><Icon name={s.icon} /></span><h3 className="h3 mb-2">{s.t}</h3><p className="small muted">{s.d}</p></article>))}
           </Reveal>

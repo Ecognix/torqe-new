@@ -8,7 +8,7 @@ export default function Contact() {
     <>
       <section className="pt-40 pb-12">
         <div className="wrap">
-          <h1 className="h1 max-w-[14ch]">Book a demo.</h1>
+          <h1 className="h1 max-w-[14ch]">Book a <span className="heading-accent">demo.</span></h1>
           <p className="lead mt-6">See the AI agent handle a live inbound conversation, from first message to booked meeting, and ask us anything.</p>
         </div>
       </section>

@@ -11,14 +11,14 @@ export default function UseCases() {
     <>
       <section className="pt-40 pb-16">
         <div className="wrap">
-          <h1 className="h1 max-w-[16ch]">AI use cases for inbound sales.</h1>
+          <h1 className="h1 max-w-[16ch]"><span className="heading-accent">AI use cases</span> for inbound sales.</h1>
           <p className="lead mt-6">Each workflow shows what the AI agent does on its own and where your team approves. Start with one and add more as trust grows.</p>
         </div>
       </section>
       <section className="pb-20"><div className="wrap"><UseCaseTabs /></div></section>
       <section className="section tint">
         <div className="wrap">
-          <Reveal as="h2" className="h2 narrow">Every workflow at a glance</Reveal>
+          <Reveal as="h2" className="h2 narrow">Every <span className="heading-accent">workflow</span> at a glance</Reveal>
           <Reveal stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             {useCases.map((u) => (
               <article key={u.tab} className="card"><span className="ibox"><Icon name={u.icon} /></span><h3 className="h3 mb-2">{u.tab}</h3><p className="small muted mb-4">{u.out}</p>

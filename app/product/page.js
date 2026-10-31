@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Reveal from "../../components/Reveal";
 import Icon from "../../components/Icon";
-import Logo from "../../components/Logo";
 import ChannelIcon from "../../components/ChannelIcon";
 import FeatureVisual from "../../components/FeatureVisual";
 import Window from "../../components/Window";
@@ -25,15 +24,14 @@ export default function Product() {
     <>
       <section className="pt-40 pb-16">
         <div className="wrap">
-          <h1 className="h1 max-w-[16ch]">The AI agent behind your inbound.</h1>
+          <h1 className="h1 max-w-[16ch]">The <span className="heading-accent">AI agent</span> behind your inbound.</h1>
           <p className="lead mt-6">Torqe ingests your internal documentation, then autonomously qualifies leads, answers complex technical queries, generates quotes, drafts terms and books meetings in the channel your prospect prefers.</p>
         </div>
       </section>
 
       <section className="section dark relative overflow-hidden">
-        <Logo white size={560} spin className="absolute -left-52 -bottom-40 opacity-[.05]" />
         <div className="wrap relative">
-          <Reveal as="h2" className="h2 narrow">How the AI agent works</Reveal>
+          <Reveal as="h2" className="h2 narrow">How the <span className="heading-accent">AI agent</span> works</Reveal>
           <p className="lead mt-5 mb-12">Wake, understand, decide, act and follow up. Your guardrails sit at the decision step.</p>
           <FlowDiagram />
         </div>
@@ -41,7 +39,7 @@ export default function Product() {
 
       <section className="section">
         <div className="wrap">
-          <Reveal as="h2" className="h2 narrow">What wakes the AI up</Reveal>
+          <Reveal as="h2" className="h2 narrow">What wakes the <span className="heading-accent">AI</span> up</Reveal>
           <Reveal stagger className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mt-12">
             {triggers.map((t) => (<article key={t.t} className="card"><span className="ibox"><Icon name={t.icon} /></span><h3 className="h3 mb-2">{t.t}</h3><p className="small muted">{t.d}</p></article>))}
           </Reveal>
@@ -50,7 +48,7 @@ export default function Product() {
 
       <section className="section tint">
         <div className="wrap">
-          <Reveal as="h2" className="h2 narrow">The complete AI feature set</Reveal>
+          <Reveal as="h2" className="h2 narrow">The complete <span className="heading-accent">AI feature set</span></Reveal>
           <div className="grid gap-24 md:gap-32 mt-16">
             {features.map((f, i) => {
               const r = ROWS[f.id];
@@ -72,7 +70,7 @@ export default function Product() {
 
       <section className="section">
         <div className="wrap">
-          <Reveal as="h2" className="h2 narrow">Tools and integrations</Reveal>
+          <Reveal as="h2" className="h2 narrow">Tools and <span className="heading-accent">integrations</span></Reveal>
           <Reveal stagger className="grid md:grid-cols-3 gap-6 mt-12">
             {tools.map((g) => (
               <div key={g.g} className="card">
@@ -87,7 +85,7 @@ export default function Product() {
       <section className="section tint">
         <div className="wrap">
           <div className="split">
-            <Reveal as="h2" className="h2">Human in the loop, by design</Reveal>
+            <Reveal as="h2" className="h2"><span className="heading-accent">Human in the loop</span>, by design</Reveal>
             <Reveal className="prose" delay={120}>
               <p>A unified feed shows every AI conversation across WhatsApp, email and LinkedIn. Reps can pause the agent, edit a draft or take over live. Every draft carries its reasoning, document citations and a confidence score.</p>
               <p>Adjust autonomy rules, discount caps and fallback behaviour on the fly, with no redeploy.</p>
@@ -103,7 +101,7 @@ export default function Product() {
 
       <section className="section dark text-center">
         <div className="wrap">
-          <h2 className="h2 mx-auto max-w-[20ch]">See the AI agent on your own inbound</h2>
+          <h2 className="h2 mx-auto max-w-[20ch]">See the <span className="heading-accent">AI agent</span> on your own inbound</h2>
           <div className="product-final-actions flex flex-wrap justify-center gap-4 mt-9"><Link href="/contact" className="btn btn-light">Book a demo</Link><Link href="/pricing" className="link">View pricing</Link></div>
         </div>
       </section>

@@ -13,7 +13,7 @@ export default function Pricing() {
     <>
       <section className="pt-40 pb-16 text-center">
         <div className="wrap">
-          <h1 className="h1 mx-auto max-w-[14ch]">Pricing that scales with your inbound.</h1>
+          <h1 className="h1 mx-auto max-w-[14ch]"><span className="heading-accent">Pricing</span> that scales with your inbound.</h1>
           <p className="lead mx-auto mt-6">Start with a pilot, grow into a plan, and keep humans in control of every high-stakes AI action.</p>
         </div>
       </section>
@@ -33,7 +33,7 @@ export default function Pricing() {
       </section>
       <section className="section tint">
         <div className="wrap">
-          <Reveal as="h2" className="h2 narrow mb-10">Compare plans</Reveal>
+          <Reveal as="h2" className="h2 narrow mb-10">Compare <span className="heading-accent">plans</span></Reveal>
           <div className="compare-table-wrap">
             <table className="cmp"><thead><tr><th>Feature</th><th>Pilot</th><th>Growth</th><th>Enterprise</th></tr></thead>
               <tbody>{compare.map((r) => (<tr key={r[0]}><td>{r[0]}</td><td>{cell(r[1])}</td><td>{cell(r[2])}</td><td>{cell(r[3])}</td></tr>))}</tbody></table>
@@ -41,7 +41,7 @@ export default function Pricing() {
         </div>
       </section>
       <section className="section">
-        <div className="wrap split"><Reveal as="h2" className="h2">Pricing questions</Reveal><Reveal><Faq /></Reveal></div>
+        <div className="wrap split"><Reveal as="h2" className="h2"><span className="heading-accent">Pricing</span> questions</Reveal><Reveal><Faq /></Reveal></div>
       </section>
     </>
   );

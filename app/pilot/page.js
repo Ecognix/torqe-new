@@ -1,6 +1,5 @@
 import Reveal from "../../components/Reveal";
 import Icon from "../../components/Icon";
-import Logo from "../../components/Logo";
 import LeadForm from "../../components/LeadForm";
 import { pilotBenefits, pilotSteps } from "../../lib/data";
 
@@ -11,7 +10,7 @@ export default function Pilot() {
     <>
       <section className="pt-40 pb-16">
         <div className="wrap">
-          <h1 className="h1 max-w-[16ch]">Build with us. Become a pilot partner.</h1>
+          <h1 className="h1 max-w-[16ch]">Build with us. Become a <span className="heading-accent">pilot partner.</span></h1>
           <p className="lead mt-6">We are working with a small group of B2B teams to put an AI agent on their inbound sales. You get hands-on help and a say in what we build.</p>
         </div>
       </section>
@@ -21,9 +20,8 @@ export default function Pilot() {
         </Reveal>
       </section>
       <section className="section dark relative overflow-hidden">
-        <Logo white size={520} spin className="absolute -right-48 -bottom-40 opacity-[.05]" />
         <div className="wrap relative">
-          <Reveal as="h2" className="h2 narrow">How the pilot works</Reveal>
+          <Reveal as="h2" className="h2 narrow">How the <span className="heading-accent">pilot</span> works</Reveal>
           <Reveal stagger className="grid md:grid-cols-4 gap-6 mt-12">
             {pilotSteps.map(([t, d], i) => (<div key={t} className="card-dark"><span className="font-display font-semibold text-orange text-2xl">0{i + 1}</span><h3 className="h3 mt-3 mb-2">{t}</h3><p className="small muted">{d}</p></div>))}
           </Reveal>
@@ -33,7 +31,7 @@ export default function Pilot() {
         <div className="wrap split pilot-apply-grid">
           <div className="pilot-apply-copy">
             <p className="eyebrow mb-5">Apply</p>
-            <Reveal as="h2" className="h2">Tell us about your inbound.</Reveal>
+            <Reveal as="h2" className="h2">Tell us about your <span className="heading-accent">inbound.</span></Reveal>
             <div className="prose mt-6 muted"><p>A few details are enough to get started. We’ll follow up with a scoping call and a plan tailored to your channels and team.</p></div>
             <ul className="pilot-promises">
               {["Reply within two business days", "No commitment to apply", "Your data stays yours"].map((item) => (
