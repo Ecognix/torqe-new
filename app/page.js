@@ -17,7 +17,11 @@ export default function Home() {
       <section className="relative overflow-hidden pt-36 md:pt-44 pb-16">
         <div className="dots absolute inset-0" />
         <div className="wrap relative text-center">
-          <p className="pill fade-in"><Logo size={22} spin />Agentic AI for B2B inbound sales</p>
+          <Link href="/chat" className="pill hero-chat-link fade-in">
+            <Logo size={22} spin />
+            <span>Ask <span className="hero-chat-brand">TorqeAI</span> anything</span>
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </Link>
           <h1 className="hero-title mx-auto mt-7">
             <span className="line"><span>AI that executes</span></span>
             <span className="line"><span>your <b className="accent">inbound.</b></span></span>

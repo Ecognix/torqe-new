@@ -1,7 +1,12 @@
+"use client";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Wordmark } from "./Logo";
 
 export default function Footer() {
+  const path = usePathname();
+  if (path === "/chat") return null;
+
   return (
     <footer className="footer tint">
       <div className="wrap grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr] pt-20 pb-8">

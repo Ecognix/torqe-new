@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 import ChannelIcon from "./ChannelIcon";
 import Icon from "./Icon";
@@ -15,14 +15,29 @@ const STEPS = [
 
 export default function ChatDemo() {
   const [n, setN] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const demoRef = useRef(null);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setN(STEPS.length); return; }
-    const id = setInterval(() => setN((p) => (p >= STEPS.length + 3 ? 0 : p + 1)), 1700);
-    return () => clearInterval(id);
+    const element = demoRef.current;
+    if (!element) return;
+    let interval;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true);
+        if (!interval) interval = setInterval(() => setN((p) => (p >= STEPS.length + 3 ? 0 : p + 1)), 1700);
+      } else {
+        setVisible(false);
+        clearInterval(interval);
+        interval = undefined;
+      }
+    }, { threshold: 0.15 });
+    observer.observe(element);
+    return () => { clearInterval(interval); observer.disconnect(); };
   }, []);
   const shown = STEPS.slice(0, n);
   return (
-    <div className="win text-left mx-auto max-w-[1040px]">
+    <div ref={demoRef} className={`chat-demo win text-left mx-auto max-w-[1040px] ${visible ? "is-visible" : ""}`}>
       <div className="win-bar">
         <Logo white size={22} spin /> <b className="font-semibold">Torqe</b><span className="opacity-60">AI agent</span>
         <span className="ml-auto flex items-center gap-2 opacity-90"><i className="live" />Live session</span>
