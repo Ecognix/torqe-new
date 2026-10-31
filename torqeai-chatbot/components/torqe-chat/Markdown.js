@@ -58,7 +58,9 @@ export default function Markdown({ text }) {
     }
     if (UL.test(l) || OL.test(l)) {
       const ordered = OL.test(l), re = ordered ? OL : UL, items = [];
-      while (i < lines.length && re.test(lines[i])) items.push(lines[i++].replace(re, ""));
+      while (i < lines.length && re.test(lines[i])) {
+        items.push(lines[i++].replace(ordered ? /^\s*(?:\d+[.)]\s+)+/ : re, ""));
+      }
       const Tag = ordered ? "ol" : "ul";
       out.push(<Tag key={n++}>{items.map((t, j) => <li key={j}>{inline(t)}</li>)}</Tag>);
       continue;

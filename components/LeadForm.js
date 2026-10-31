@@ -3,6 +3,9 @@ import { useState } from "react";
 
 export default function LeadForm({ kind = "demo" }) {
   const [sent, setSent] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [partnership, setPartnership] = useState("Guided pilot");
   const [channels, setChannels] = useState(["WhatsApp"]);
   const pilot = kind === "pilot";
@@ -11,6 +14,39 @@ export default function LeadForm({ kind = "demo" }) {
       ? selected.filter((item) => item !== channel)
       : [...selected, channel]);
   };
+  const submit = async (event) => {
+    event.preventDefault();
+    if (!consent || submitting) return;
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    setSubmitting(true);
+    setError("");
+    try {
+      const response = await fetch("/api/chat-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: pilot ? "pilot" : "demo",
+          name: data.get("name"),
+          email: data.get("email"),
+          company: data.get("company"),
+          role: data.get("role"),
+          message: data.get("message"),
+          partnershipType: data.get("partnershipType"),
+          channels: data.getAll("channels"),
+          volume: data.get("volume"),
+          consent,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Your request could not be sent.");
+      setSent(true);
+    } catch (submitError) {
+      setError(submitError.message || "Your request could not be sent. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
   if (sent) return (
     <div className="sent" role="status">
       <h3 className="h3 mb-2">Thank you, we have it</h3>
@@ -18,7 +54,7 @@ export default function LeadForm({ kind = "demo" }) {
     </div>
   );
   return (
-    <form onSubmit={(e) => { e.preventDefault(); /* connect to your CRM, email service or an API route */ setSent(true); }} className={`form${pilot ? " pilot-form" : ""}`}>
+    <form onSubmit={submit} className={`form${pilot ? " pilot-form" : ""}`}>
       <div className="grid sm:grid-cols-2 gap-4">
         <label>Full name<input name="name" required autoComplete="name" placeholder="e.g. Maya Chen" /></label>
         <label>Work email<input name="email" type="email" required autoComplete="email" placeholder="you@company.com" /></label>
@@ -57,7 +93,12 @@ export default function LeadForm({ kind = "demo" }) {
       </label>
       )}
       <label>{pilot ? "What would you like to automate?" : "What would you like Torqe to handle?"}<textarea name="message" rows={pilot ? 3 : 4} placeholder={pilot ? "Share a little about your inbound process..." : "Qualification, quotes, scheduling, follow-ups..."} /></label>
-      <button className="btn justify-self-start" type="submit">{pilot ? "Apply to the pilot" : "Book a demo"}</button>
+      <label className="lead-form-consent">
+        <input type="checkbox" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />
+        <span>I agree to send these details to Torqe so the team can respond. The details will be emailed to <a href="mailto:hello@torqe.ai">hello@torqe.ai</a>.</span>
+      </label>
+      {error && <p className="lead-form-error" role="alert">{error}</p>}
+      <button className="btn justify-self-start" type="submit" disabled={!consent || submitting}>{submitting ? "Sending…" : pilot ? "Apply to the pilot" : "Book a demo"}</button>
     </form>
   );
 }

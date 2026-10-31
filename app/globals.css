@@ -164,6 +164,11 @@ h1,h2,h3,h4{font-family:var(--font-inter),system-ui,sans-serif;font-weight:600;l
 .form label{display:grid;gap:.4rem;font-weight:500;font-size:.95rem}
 .form input,.form select,.form textarea{font:inherit;padding:.9rem 1rem;border:1px solid rgba(11,11,12,.18);background:var(--paper);color:var(--ink);border-radius:0;transition:border-color .3s}
 .form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--ink)}
+.lead-form-consent{display:flex!important;grid-template-columns:none!important;align-items:flex-start;gap:.6rem;font-size:.84rem!important;line-height:1.45}
+.lead-form-consent input{flex:none;width:auto;margin:.2rem 0 0;accent-color:var(--orange)}
+.lead-form-consent a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.lead-form-error{color:#8A3300;font-size:.9rem}
+.form button:disabled{opacity:.55;cursor:not-allowed}
 .sent{background:var(--paper);padding:2.5rem;border-radius:16px}
 .footer a:hover{color:var(--orange-d)}
 .use-case-panel-plain{min-width:0;background:transparent}

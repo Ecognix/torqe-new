@@ -44,6 +44,76 @@ const Ico = ({ d, size = 18 }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>
 );
 
+function detectLeadAction(text) {
+  const normalized = text.toLowerCase();
+  if (/\b(pilot|pilot partner|pilot program)\b/.test(normalized)
+    && /\b(apply|application|join|become|sign up|interested|start|submit|fill)\b/.test(normalized)
+    || /\b(application form|submit (?:an? )?application|fill (?:out )?(?:an? )?application)\b/.test(normalized)) return "pilot";
+  if (/\b(demo|demonstration)\b/.test(normalized)
+    && /\b(book|schedule|request|arrange|see|want|like|start)\b/.test(normalized)) return "demo";
+  if (/\b(submit|fill out|complete)\b.{0,25}\b(contact )?form\b/.test(normalized)) return "contact";
+  if (/\b(contact|email|talk|speak|reach out|connect)\b/.test(normalized)
+    && /\b(team|someone|sales|torqe)\b/.test(normalized)) return "contact";
+  return null;
+}
+
+function LeadActionCard({ action }) {
+  const [values, setValues] = useState({ name: "", email: "", company: "", role: "", message: "" });
+  const [consent, setConsent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+  const type = action === "pilot" ? "pilot" : action === "contact" ? "contact" : "demo";
+  const title = type === "pilot" ? "Apply to the pilot" : action === "contact" ? "Contact the Torqe team" : "Request a demo";
+
+  const submit = async (event) => {
+    event.preventDefault();
+    if (!consent || busy) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch("/api/chat-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...values, type, consent }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Your request could not be sent.");
+      setSent(true);
+    } catch (submitError) {
+      setError(submitError.message || "Your request could not be sent. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  if (sent) {
+    return <p className="tc-lead-success" role="status">Your {type === "pilot" ? "pilot application" : type === "contact" ? "contact request" : "demo request"} has been sent to the Torqe team. They’ll follow up at {values.email}.</p>;
+  }
+
+  return (
+    <form className="tc-lead-form" onSubmit={submit}>
+      <h3>{title}</h3>
+      <p>Share your details and the Torqe team will follow up. Nothing is sent until you submit this form.</p>
+      <div className="tc-lead-grid">
+        <label>Name<input name="name" autoComplete="name" maxLength={200} required value={values.name} onChange={(event) => setValues((current) => ({ ...current, name: event.target.value }))} /></label>
+        <label>Work email<input name="email" type="email" autoComplete="email" maxLength={200} required value={values.email} onChange={(event) => setValues((current) => ({ ...current, email: event.target.value }))} /></label>
+        <label>Company<input name="company" autoComplete="organization" maxLength={200} required value={values.company} onChange={(event) => setValues((current) => ({ ...current, company: event.target.value }))} /></label>
+        <label>Role <span>(optional)</span><input name="role" autoComplete="organization-title" maxLength={200} value={values.role} onChange={(event) => setValues((current) => ({ ...current, role: event.target.value }))} /></label>
+      </div>
+      <label className="tc-lead-message">What would you like the team to know? <span>(optional)</span>
+        <textarea name="message" rows={3} maxLength={3000} value={values.message} onChange={(event) => setValues((current) => ({ ...current, message: event.target.value }))} />
+      </label>
+      <label className="tc-lead-consent">
+        <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
+        <span>I agree to send these details to Torqe so the team can respond to my request. They will be emailed to <a href="mailto:hello@torqe.ai">hello@torqe.ai</a>.</span>
+      </label>
+      {error && <p className="tc-lead-error" role="alert">{error}</p>}
+      <button className="tc-lead-submit" type="submit" disabled={!consent || busy}>{busy ? "Sending…" : title}</button>
+    </form>
+  );
+}
+
 function splitSuggestions(text) {
   const match = text.match(/\n{2,}\*\*Suggested questions\*\*\s*\n((?:\s*[-*]\s+.+\n?){1,3})\s*$/i);
   if (!match) return { answer: text, questions: [] };
@@ -69,7 +139,7 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
   const [termsChecked, setTermsChecked] = useState(false);
   const [researchChoice, setResearchChoice] = useState("no");
   const [serviceStatus, setServiceStatus] = useState("checking");
-  const abortRef = useRef(null), fileRef = useRef(null), taRef = useRef(null), scrollRef = useRef(null), endRef = useRef(null), stick = useRef(true);
+  const abortRef = useRef(null), replyRef = useRef(null), fileRef = useRef(null), taRef = useRef(null), scrollRef = useRef(null), endRef = useRef(null), stick = useRef(true);
 
   const activeSession = sessions.find((session) => session.id === activeId);
   const messages = activeSession?.messages || [];
@@ -161,27 +231,34 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
     if ((!q && !imgs.length) || busy || serviceStatus !== "ready" || !activeId) return;
     const sessionId = activeId;
     const history = [...base, { id: uid(), role: "user", content: q, images: imgs }];
-    const reply = { id: uid(), role: "assistant", content: "" };
+    const leadAction = detectLeadAction(q);
+    const reply = { id: uid(), role: "assistant", content: "", ...(leadAction ? { leadAction } : {}) };
     updateSessionMessages(sessionId, [...history, reply]); setInput(""); setImages([]); setBusy(true); setError(null); stick.current = true;
     const ctl = new AbortController(); abortRef.current = ctl;
+    replyRef.current = { sessionId, replyId: reply.id };
     try {
       const res = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, signal: ctl.signal,
         body: JSON.stringify({ messages: history.map(({ role, content, images: im }) => ({ role, content, ...(im?.length ? { images: im } : {}) })) }) });
       if (!res.ok) { const j = await res.json().catch(() => ({})); throw new Error(j.error || "Something went wrong. Please try again."); }
-      const reader = res.body.getReader(), dec = new TextDecoder();
-      let acc = "";
-      for (;;) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        acc += dec.decode(value, { stream: true });
-        updateSessionMessages(sessionId, (current) => current.map((x) => (x.id === reply.id ? { ...x, content: acc } : x)));
+      const answer = await res.text();
+      for (let index = 0; index < answer.length; index += 4) {
+        if (ctl.signal.aborted) break;
+        const content = answer.slice(0, index + 4);
+        updateSessionMessages(sessionId, (current) => current.map((x) => (x.id === reply.id ? { ...x, content } : x)));
+        await new Promise((resolve) => setTimeout(resolve, 18));
       }
     } catch (e) {
       if (e.name !== "AbortError") {
         setError(e.message || "Something went wrong.");
         updateSessionMessages(sessionId, (current) => current.filter((x) => !(x.id === reply.id && !x.content)));
       }
-    } finally { setBusy(false); abortRef.current = null; }
+    } finally {
+      if (abortRef.current === ctl) {
+        setBusy(false);
+        abortRef.current = null;
+        replyRef.current = null;
+      }
+    }
   }, [messages, busy, endpoint, images, serviceStatus, activeId, updateSessionMessages]);
 
   const addFiles = async (files) => {
@@ -194,9 +271,24 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
     const fs = Array.from(e.clipboardData?.files || []).filter((f) => f.type.startsWith("image/"));
     if (fs.length) { e.preventDefault(); addFiles(fs); }
   };
-  const stop = () => abortRef.current?.abort();
+  const stop = () => {
+    const controller = abortRef.current;
+    if (!controller) return;
+    controller.abort();
+    const reply = replyRef.current;
+    if (reply) {
+      updateSessionMessages(reply.sessionId, (current) => current.map((message) =>
+        message.id === reply.replyId ? { ...message, stopped: true } : message
+      ));
+    }
+    abortRef.current = null;
+    replyRef.current = null;
+    setBusy(false);
+  };
   const newChat = useCallback(() => {
     abortRef.current?.abort();
+    abortRef.current = null;
+    replyRef.current = null;
     setBusy(false);
     setError(null);
     setInput("");
@@ -218,6 +310,8 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
   }, [newChat]);
   const selectSession = (sessionId) => {
     abortRef.current?.abort();
+    abortRef.current = null;
+    replyRef.current = null;
     setActiveId(sessionId);
     setBusy(false);
     setError(null);
@@ -321,7 +415,7 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
                   return (
                     <>
                       <Markdown text={parsed.answer} />
-                      {!busy && m.id === lastBot && followups.length > 0 && (
+                      {!busy && !m.stopped && m.id === lastBot && followups.length > 0 && (
                         <div className="tc-followups" aria-label="Suggested questions">
                           <span>Suggested questions</span>
                           {followups.map((question) => (
@@ -331,11 +425,13 @@ export default function TorqeChat({ endpoint = "/api/chat", variant = "page", on
                       )}
                     </>
                   );
-                })() : <div className="tc-dots" aria-label="TorqeAI is thinking"><span /><span /><span /></div>}
+                })() : busy && m.id === lastBot ? <div className="tc-dots" aria-label="TorqeAI is thinking"><span /><span /><span /></div> : null}
+                {m.leadAction && !m.stopped && <LeadActionCard key={m.id} action={m.leadAction} />}
+                {m.stopped && <div className="tc-stopped" role="status"><span>Response stopped</span></div>}
                 {!!strip(m.content) && !(busy && m.id === lastBot) && (
                   <div className="tc-actions">
                     <button onClick={() => copy(m)} aria-label="Copy answer" title="Copy"><Ico d={copied === m.id ? IC.check : IC.copy} size={16} /></button>
-                    <button className="tc-share" onClick={() => share(m)} aria-label="Share answer" title="Share answer"><Ico d={shared === m.id || copied === m.id ? IC.check : IC.share} size={16} /><span>{shared === m.id ? "Shared" : copied === m.id ? "Copied" : "Share"}</span></button>
+                    <button className="tc-share" onClick={() => share(m)} aria-label="Share answer" title="Share answer"><Ico d={shared === m.id ? IC.check : IC.share} size={16} /><span>{shared === m.id ? "Shared" : "Share"}</span></button>
                     {m.id === lastBot && <button onClick={regenerate} aria-label="Regenerate answer" title="Regenerate"><Ico d={IC.redo} size={16} /></button>}
                   </div>
                 )}

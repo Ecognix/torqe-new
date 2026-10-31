@@ -21,6 +21,14 @@ Restart `npm run dev`. The key is used only inside `app/api/chat/route.js` (serv
 Free-tier keys are rate limited (about 40 requests per minute), and the route also limits each IP to 12 messages a minute (`CHAT_RATE_LIMIT`).
 Any chat model ID enabled on build.nvidia.com may be configured. Visitors can attach up to 3 images (button or paste). They are shrunk to 1024px in the browser, and the server sends images to `NVIDIA_VISION_MODEL`, or to `NVIDIA_MODEL` when that is not set. Check the model page on build.nvidia.com ("View Code") to confirm a model accepts images on your key. TorqeAI can search public web results when a visitor asks for current information; web sources are linked in the answer.
 
+## 2a. Enable demo and pilot submissions
+The website's demo and pilot forms (including forms opened in chat) send requests to `hello@torqe.ai` through Resend. Create a Resend API key, verify the sender domain in Resend, and set these server-side environment variables in `.env.local` and in Vercel Production:
+
+    RESEND_API_KEY=re_...
+    RESEND_FROM_EMAIL=Torqe <verified-sender@your-domain.com>
+
+Redeploy after updating Vercel variables. Visitors must fill the form and explicitly consent before submission. The chat confirms success only after the email provider accepts the request. Submissions are rate-limited per server instance.
+
 ## 3. Show it on your site
 Floating button on every page: in `app/layout.js` add
 
