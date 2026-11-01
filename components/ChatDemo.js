@@ -45,7 +45,7 @@ export default function ChatDemo() {
       <div className="grid md:grid-cols-[1.6fr_1fr]">
         <div className="p-5 md:p-7">
           <div className="flex items-center gap-3 mb-5"><ChannelIcon k="whatsapp" size={30} /><div><div className="font-medium leading-tight">Acme Logistics</div><div className="text-sm muted">WhatsApp · Operations director</div></div></div>
-          <div className="flex flex-col gap-3 min-h-[360px]">
+          <div className="chat-demo-messages flex flex-col gap-3 min-h-[360px]">
             {shown.map((s, i) => {
               if (s.k === "chips") return <div key={i} className="chips">{s.items.map((c) => <span key={c} className="chip"><Icon name="spark" size={12} />{c}</span>)}</div>;
               if (s.k === "approval") {
@@ -61,9 +61,9 @@ export default function ChatDemo() {
             })}
           </div>
         </div>
-        <aside className="hidden md:block p-7 bg-beige">
+        <aside className="chat-demo-activity hidden md:block p-7 bg-beige">
           <div className="text-sm font-semibold mb-4 flex items-center gap-2"><Icon name="cpu" size={16} />Agent activity</div>
-          <div className="grid gap-3">{shown.map((s, i) => <div key={i} className="logline"><i />{s.log}</div>)}</div>
+          <div className="chat-demo-logs grid gap-3">{shown.map((s, i) => <div key={i} className="logline"><i />{s.log}</div>)}</div>
         </aside>
       </div>
     </div>
