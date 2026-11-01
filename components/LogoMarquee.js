@@ -8,7 +8,7 @@ export default function LogoMarquee({ items, label, dark = false }) {
         <div className="logo-marquee-track">
           {repeatedItems.map((item, index) => (
             <span key={`${item.name}-${index}`} className="logo-marquee-chip" aria-hidden={index >= items.length}>
-              <img src={item.src} alt="" width="28" height="28" />
+              <img src={item.src} alt="" width="36" height="36" />
               {item.name}
             </span>
           ))}
