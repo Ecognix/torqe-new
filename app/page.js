@@ -17,25 +17,27 @@ import { facts, features, triggers, autonomous, approval, modelMarqueeItems, too
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden pt-36 md:pt-44 pb-16">
+      <section className="home-hero relative overflow-hidden pt-36 md:pt-44 pb-16">
         <div className="dots absolute inset-0" />
-        <div className="wrap relative text-center">
-          <Link href="/chat" className="pill hero-chat-link fade-in">
-            <Logo size={22} spin />
-            <span>Ask <span className="hero-chat-brand">TorqeAI</span> anything</span>
-            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </Link>
-          <h1 className="hero-title mx-auto mt-7">
-            <span className="line"><span>AI that executes</span></span>
-            <span className="line"><span>your <b className="accent">inbound.</b></span></span>
-          </h1>
-          <p className="lead mx-auto mt-7 fade-in">Torqe is an AI agent that qualifies leads, answers technical questions, drafts quotes and books meetings on WhatsApp, email and LinkedIn, while your team approves the moves that matter.</p>
-          <div className="hero-actions flex flex-wrap justify-center gap-4 mt-9 fade-in">
-            <Link href="/contact" className="btn">Book a demo</Link>
-            <Link href="/pilot" className="btn btn-ghost">Become a pilot partner</Link>
+        <div className="wrap home-hero-grid relative">
+          <div className="home-hero-copy">
+            <Link href="/chat" className="pill hero-chat-link fade-in">
+              <Logo size={22} spin />
+              <span>Ask <span className="hero-chat-brand">TorqeAI</span> anything</span>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </Link>
+            <h1 className="hero-title mt-7">
+              <span className="line"><span>AI that executes</span></span>
+              <span className="line"><span>your <b className="accent">inbound.</b></span></span>
+            </h1>
+            <p className="lead mt-7 fade-in">Torqe is an AI agent that qualifies leads, answers technical questions, drafts quotes and books meetings on WhatsApp, email and LinkedIn, while your team approves the moves that matter.</p>
+            <div className="hero-actions flex flex-wrap gap-4 mt-9 fade-in">
+              <Link href="/contact" className="btn">Book a demo</Link>
+              <Link href="/pilot" className="btn btn-ghost">Become a pilot partner</Link>
+            </div>
           </div>
+          <Reveal className="home-hero-chat"><ChatDemo /></Reveal>
         </div>
-        <div className="wrap relative mt-16 fade-in"><ChatDemo /></div>
       </section>
 
       <section className="channel-marquee-section">
