@@ -1,0 +1,3 @@
+[submodule "torqe-console"]
+	path = torqe-console
+	url = https://github.com/Ecognix/torqe-b2b.git
