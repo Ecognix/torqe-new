@@ -32,7 +32,7 @@ export default function Header() {
   return (
     <header className={`header ${solid || open ? "solid" : ""}`}>
       <div className="wrap header-row">
-        <Link href="/" aria-label={isChat ? "TorqeAI home" : "Torqe home"}>
+        <Link href="/" className="header-brand" aria-label={isChat ? "TorqeAI home" : "Torqe home"}>
           {isChat ? (
             <span className="torqeai-brand">
               <Logo size={29} />

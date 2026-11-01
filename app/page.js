@@ -41,7 +41,7 @@ export default function Home() {
       </section>
 
       <section className="channel-marquee-section">
-        <div className="wrap"><p className="text-center small muted mb-6">The AI agent meets prospects where they already are, and your team where they already work</p></div>
+        <div className="wrap"><p className="text-center small muted channel-marquee-heading mb-8">The AI agent meets prospects where they already are, and your team where they already work</p></div>
         <Marquee />
       </section>
 
