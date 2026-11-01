@@ -43,8 +43,10 @@ export default function Header() {
         {!isChat && (
           <nav className={`nav ${open ? "open" : ""}`} aria-label="Main">
             {NAV.map((l) => (<Link key={l.href} href={l.href} aria-current={path === l.href ? "page" : undefined}>{l.label}</Link>))}
-            <a href="https://torqe-console.vercel.app" className="btn btn-sm">Console</a>
-            <Link href="/contact" className="btn btn-sm">Book a demo</Link>
+            <div className="nav-ctas">
+              <a href="https://torqe-console.vercel.app" className="btn btn-sm">Console</a>
+              <Link href="/contact" className="btn btn-sm">Book a demo</Link>
+            </div>
           </nav>
         )}
         <div className="header-actions">
